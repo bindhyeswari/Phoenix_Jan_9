@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        // perform multiple asynchronous actions with one final callback in the end
+
+        var arr = [
+                'http://cdn.css-tricks.com/wp-content/uploads/2014/05/flex-direction1.svg',
+                'http://cdn.css-tricks.com/wp-content/uploads/2014/05/flex-wrap.svg',
+                'http://cdn.css-tricks.com/wp-content/uploads/2013/04/justify-content.svg',
+                'http://cdn.css-tricks.com/wp-content/uploads/2014/05/align-items.svg'
+        ];
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var imgs = [];
+            arr.forEach(function(url) {
+                imgLoad(url, function (img) {
+
+                    imgs.push(img);
+
+                    if (imgs.length === arr.length) {
+                        // do whatever here ...
+                        for (var i = 0, len = imgs.length; i < len; i++) {
+                            document.body.appendChild(imgs[i]);
+                        }
+                    }
+
+                });
+            });
+
+
+        });
+
+        function imgLoad(url, callback) {
+            var img = document.createElement('img');
+            img.addEventListener('load', function () {
+                callback(img);
+            });
+            img.src = url;
+        }
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
